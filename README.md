@@ -1,5 +1,5 @@
 ## Introduction
-BRITE-Kit (Bioacoustic Recognizer Technology Kit) is a toolkit for building your own recognizer. It is licensed under the terms of the MIT license. BRITE-Kit is essentially a stripped down version of [HawkEars](https://github.com/jhuus/BRITE-Kit), without the bird-specific features, and with much of the complexity removed.
+BRITE-Kit (Bioacoustic Recognizer Technology Kit) is a toolkit for building your own recognizer. It is essentially a stripped down version of [HawkEars](https://github.com/jhuus/BRITE-Kit), without the bird-specific features, and with much of the complexity removed.
 
 BRITE-Kit models are trained on spectrograms. By default, spectrograms represent 5-second segments, but you have full control over segment length and parameters such as the minimum and maximum frequency. A selection of leading model types and sizes is included, along with scripts to perform functions such as:
 
