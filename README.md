@@ -93,7 +93,7 @@ python extract_all.py --code Noise --name Noise --dir ../data/recordings/Noise
 
 If the database does not exist, this will create it and create a class called Noise with 5-second spectrograms taken at 2.5-second increments for all the specified recordings. The same approach can be used for the curated Google Audioset classes. Note that every class must be given a name and a code.
 
-If you download recordings from iNaturalist though, e.g. for Northern Leopard Frog, you probably shoudn't just insert them all into the database. Instead, you can use tools/plot_recordings.py to plot the segments, then delete the undesirable image files and use tools/extract_by_image.py to insert training records corresponding to the remaining images.
+If you download recordings from iNaturalist though, e.g. for Northern Leopard Frog, you probably shouldn't just insert them all into the database. Instead, you can use tools/plot_recordings.py to plot the segments, then delete the undesirable image files and use tools/extract_by_image.py to insert training records corresponding to the remaining images.
 
 There are a number of other scripts in the tools directory that help with managing the training database:
 
