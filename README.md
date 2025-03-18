@@ -48,7 +48,7 @@ Developing a recognizer with BRITE-Kit involves iterating on the following steps
 
 ### Collecting Training Data
 #### Introduction
-You can use your own recordings, or recordings from public source such as:
+You can use your own recordings, or recordings from public sources such as:
 
 - [Google Audioset](https://research.google.com/audioset/)
 - [iNaturalist](https://www.inaturalist.org/)
@@ -103,6 +103,8 @@ There are a number of other scripts in the tools directory that help with managi
 4. del_spec.py lets you delete the spectrograms corresponding to images in a directory. First use plot_from_db.py then delete the images you want to keep (or copy the ones you want to delete to another directory), and use del_spec.py to delete the ones you don't want to keep.
 5. del_empty_recordings.py lets you delete any recordings that have no associated spectrograms. This can happen if you get aggressive with del_spec.py, and you can check for it by running db_report.py.
 
+If you want to start over, just delete data/training.db, or move it to a backup location.
+
 ### Training
 The first step in training is to run tools/pickle_db.py. It extracts the data from the training database into a binary file (data/training.pkl) that is used by the training process. Typically you will run training many times between database updates, and using a binary input file is faster than reading the database directly.
 
@@ -114,7 +116,7 @@ Next you need to define your training parameters by editing core/configs.py. You
 
 For model type, it is usually best to use "custom_x_y", where x is "hgnet", "efficientnet" or "vovnet" and y is an integer. The model directory contains definitions for these three models, and lists the corresponding model sizes. For example, "custom_vovnet_1" gives a model with about 50K parameters, while "custom_vovnet_8" has about 3.1M parameters. It's usually best to use the smallest model that produces good results. You don't have to use custom models though. As an alternative, you can use any model name supported by [timm](https://github.com/huggingface/pytorch-image-models), e.g. "tf_efficientnet_b0".
 
-For the first training run, start with a small number of epochs, e.g. 5, so you can do some basic validation before trying more. Specifying val_portion=.1 uses 90% of the data for training and 10% for validation, which lets you see how well the model is working on training data.
+For the first training run, start with a small number of epochs, e.g. 5, so you can do some basic validation before trying more. Specifying val_portion=.1 uses 90% of the data for training and 10% for validation, which lets you see how well the model is working on data that is excluded from training. Most likely the validation data is highly correlated with the training data though, so it is best to try a separate test dataset after training.
 
 The output of training is stored under the logs directory. For instance, the first run will be under logs/fold-0/version_0. Checkpoints are stored under the checkpoints directory. To view a graph of the training loss over time, type:
 
@@ -122,12 +124,14 @@ The output of training is stored under the logs directory. For instance, the fir
 tensorboard --logdir logs/fold-0/version_0
 ```
 
-This will print a URL that you can paste into your browser to see the reports.
+This will print a URL that you can paste into your browser to see the graph.
 
 ### Using Your Trained Models
 To use a trained model, copy the checkpoint file into data/ckpt, then run analyze.py to run inference on some recordings. If there are multiple checkpoint files in data/ckpt, they will be treated as an ensemble. That is, the average of all their predictions will be used. In this case it's very important that all checkpoints represent the same classes though!
 
 The file data/ignore.txt lists classes that are excluded from inference output. By default, only Noise is excluded, but you can edit ignore.txt to add other classes such as Speech.
+
+Currently, analyze.py outputs an Audacity label file for every input recording. You can view the results by opening the recording in Audacity and then selecting File/Import/Labels. We will add an option to output a CSV file in the near future.
 
 
 
