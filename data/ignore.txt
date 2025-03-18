@@ -1,0 +1,2 @@
+# Names of classes to exclude from inference output
+Noise
