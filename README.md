@@ -56,7 +56,7 @@ You can use your own recordings, or recordings from public sources such as:
 
 In addition, BRITE-Kit includes a small selection of noise recordings under data/recordings/Noise. It is very important to include a diverse set of background noise spectrograms. A class called Noise is required, and should include only wind and rain sounds. Other non-target sounds such as speech or traffic can be included in separate classes, or grouped together into a class called Other. The class name Noise is required, but other class names can be anything you choose.
 #### Google Audioset
-Google Audioset is simply metadata for the audio in a large set of Youtube recordings. The metadata is included in the data/audioset directory. There are 527 defined classes, listed in class_list.csv. For example, the first five classes are:
+Google Audioset is simply metadata for the audio in a large set of Youtube videos. The metadata is included in the data/audioset directory. There are 527 defined classes, listed in class_list.csv. For example, the first five classes are:
 
 1. Speech
 2. Male speech, man speaking
