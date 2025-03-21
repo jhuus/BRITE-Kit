@@ -1,7 +1,7 @@
 # To create or update a list of curated segments:
 #
 # 1. Download the recordings using audioset.py
-# 2. Plot them using plot.py
+# 2. Plot them using plot_recordings.py --all
 # 3. Delete any spectrograms you wish to exclude
 # 4. Run this script
 #
