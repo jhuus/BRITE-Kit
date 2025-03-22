@@ -71,7 +71,7 @@ for audio_path in audio_paths:
     else:
         # plot individual segments
         increment = max(1.0, seconds - overlap)
-        offsets = np.arange(0, recording_seconds - increment, increment).tolist()
+        offsets = np.arange(0, recording_seconds - increment + .01, increment).tolist()
         specs = _audio.get_spectrograms(offsets, segment_len=seconds)
         for i, spec in enumerate(specs):
             image_path = os.path.join(output_dir, f"{Path(audio_path).stem}-{offsets[i]:.1f}.jpeg")
